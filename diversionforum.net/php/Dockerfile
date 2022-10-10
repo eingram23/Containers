@@ -5,7 +5,7 @@ COPY php.ini /usr/local/etc/php/
 
 RUN docker-php-ext-install mysqli
 
-RUN apt-get update -y && apt-get install -y libonig-devs endmail libpng-dev libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install -y libonig-dev sendmail libpng-dev libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN printf "\n" | pecl install imagick
 RUN docker-php-ext-enable imagick mbstring exif
 
