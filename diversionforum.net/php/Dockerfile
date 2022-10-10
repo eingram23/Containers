@@ -1,7 +1,7 @@
 # Filename: Dockerfile
 FROM php:7.4.32-fpm
 
-COPY php.ini /usr/local/php/
+COPY php.ini /usr/local/etc/php/
 
 RUN docker-php-ext-install mysqli
 
