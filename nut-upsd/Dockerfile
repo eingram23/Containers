@@ -1,5 +1,5 @@
 # Filename: Dockerfile
-FROM instantlinux:nut-uspd:2.8.0-r4
+FROM instantlinux/nut-uspd:2.8.0-r4
 
 WORKDIR /etc/nut
 COPY upsmon.conf upssched.conf ./
