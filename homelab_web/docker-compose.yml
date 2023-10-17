@@ -2,10 +2,12 @@ version: '3.8'
 
 services:
 
-  prometheus:
+  php-nginx:
     image: trafex/php-nginx:latest
     ports:
-      - 80:8000
+      - 8080:8080
+    volumes:
+      - ./html:/var/www/html
     restart: unless-stopped
 
   
