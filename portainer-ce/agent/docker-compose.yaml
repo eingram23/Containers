@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  agent:
+    image: docker.io/portainer/agent:2.14.2  # Fully qualified path for the agent
+    container_name: portainer_agent
+    restart: always
+    privileged: true
+    ports:
+      - "9001:9001"
+    volumes:
+      - /run/user/1001/podman/podman.sock:/var/run/docker.sock  # Updated to Podman socket
+      - /home/eingram/.local/share/containers/storage:/var/lib/docker/volumes  # Updated to Podman volumes

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  portainer:
+    image: docker.io/portainer/portainer-ce:2.14.2  # Fully qualified path and updated to the latest version number
+    container_name: portainer
+    restart: always
+    privileged: true
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /run/podman/podman.sock:/var/run/docker.sock  # Updated to Podman socket
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
