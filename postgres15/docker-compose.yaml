@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres15
+    environment:
+      POSTGRES_USER: yourusername
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: yourdatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  dbeaver:
+    image: dbeaver/cloudbeaver
+    container_name: dbeaver
+    environment:
+      CB_ADMIN_NAME: cbadmin
+      CB_ADMIN_PASSWORD: admin
+    ports:
+      - "8978:8978"
+    depends_on:
+      - postgres
+    network_mode: host
+    volumes:
+      - dbeaver_data:/opt/dbeaver
+
+volumes:
+  postgres_data:
+  dbeaver_data:
