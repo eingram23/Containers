@@ -1,0 +1,46 @@
+[Unit]
+Description=Technitium DNS Server
+After=network.target
+
+[Container]
+Image=docker.io/technitium/dns-server:latest
+ContainerName=dns-server
+HostName=dns-server
+# For DHCP deployments, use "host" network mode and remove all the port mappings, including the ports array by commenting them
+# NetworkMode=host
+PublishPort=5380:5380/tcp
+# PublishPort=53443:53443/tcp
+PublishPort=10.10.0.31:53:53/udp
+PublishPort=10.10.0.31:53:53/tcp
+# PublishPort=853:853/udp
+# PublishPort=853:853/tcp
+# PublishPort=443:443/udp
+# PublishPort=443:443/tcp
+# PublishPort=80:80/tcp
+# PublishPort=8053:8053/tcp
+# PublishPort=67:67/udp
+Environment=DNS_SERVER_DOMAIN=dns-server
+# Environment=DNS_SERVER_ADMIN_PASSWORD=password
+# Environment=DNS_SERVER_ADMIN_PASSWORD_FILE=password.txt
+# Environment=DNS_SERVER_PREFER_IPV6=false
+# Environment=DNS_SERVER_WEB_SERVICE_LOCAL_ADDRESSES=172.17.0.1,127.0.0.1
+# Environment=DNS_SERVER_WEB_SERVICE_HTTP_PORT=5380
+# Environment=DNS_SERVER_WEB_SERVICE_HTTPS_PORT=53443
+# Environment=DNS_SERVER_WEB_SERVICE_ENABLE_HTTPS=false
+# Environment=DNS_SERVER_WEB_SERVICE_USE_SELF_SIGNED_CERT=false
+# Environment=DNS_SERVER_OPTIONAL_PROTOCOL_DNS_OVER_HTTP=false
+# Environment=DNS_SERVER_RECURSION=AllowOnlyForPrivateNetworks
+# Environment=DNS_SERVER_RECURSION_NETWORK_ACL=192.168.10.0/24, !192.168.10.2
+# Environment=DNS_SERVER_RECURSION_DENIED_NETWORKS=1.1.1.0/24
+# Environment=DNS_SERVER_RECURSION_ALLOWED_NETWORKS=127.0.0.1, 192.168.1.0/24
+# Environment=DNS_SERVER_ENABLE_BLOCKING=false
+# Environment=DNS_SERVER_ALLOW_TXT_BLOCKING_REPORT=false
+# Environment=DNS_SERVER_BLOCK_LIST_URLS=
+# Environment=DNS_SERVER_FORWARDERS=1.1.1.1, 8.8.8.8
+# Environment=DNS_SERVER_FORWARDER_PROTOCOL=Tcp
+# Environment=DNS_SERVER_LOG_USING_LOCAL_TIME=true
+Volume=config.volume:/etc/dns
+Sysctl=net.ipv4.ip_local_port_range=1024 65000
+
+[Install]
+WantedBy=multi-user.target
